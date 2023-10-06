@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+
+      #toggle {
+        background-color: hsl(337, 38%, 50%);
+        padding: 10px;
+        color: white;
+        border: 0px;
+        cursor: pointer;
+      }
+
+    </style>
+  </head>
+  <body>
+
+
+    <button id="toggle">Start</button>
+
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io()
+  
+      function clickButton () {
+       if (toggle.textContent === 'Start') {
+         toggle.textContent = 'Stop'
+         toggle.style.backgroundColor = 'hsl(103, 38%, 50%)'
+         socket.emit('status', 1)
+       } else {
+         toggle.textContent = 'Start'
+         toggle.style.backgroundColor = 'hsl(337, 38%, 50%)' 
+         socket.emit('status', 0)
+         // CSS property names use "camel case" 
+         // so "background-color" becomes "backgroundColor"
+       }
+      }
+      
+      const toggle = document.querySelector('#toggle')
+      
+      toggle.addEventListener('click', clickButton)
+
+
+    </script>
+  </body>
+</html>
