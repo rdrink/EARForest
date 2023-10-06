@@ -4,7 +4,7 @@ const OSC = require('node-osc')
 const MAX_IP = '0.0.0.0'
 const MAX_PORT = '2222'
 // const serverURL = 'http://localhost:3000'
-const serverURL = 'http://165.232.132.201:3000'
+const serverURL = 'http://165.232.132.201'
 const socket = io(serverURL)
 
 socket.on('connect', () => {
