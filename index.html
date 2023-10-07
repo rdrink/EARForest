@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>EAR Forest</title>
     <style>
 
       #toggle {
@@ -12,14 +12,30 @@
         border: 0px;
         cursor: pointer;
       }
+	  
+      h2 {
+		  	font-family: Arial, Helvetica, sans-serif;
+      	/*color: gray;*/
+	  	}
+      
+      p {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      
+			#users {
+        font-size: 0.75em;
+      	color: gray;
+      }
+      
+      
 
-    </style>
+  </style>
   </head>
   <body>
-
-
+	  <h2>EAR Forest Web Player</h2>
+    
     <button id="toggle">Start</button>
-
+	
     
     <script src="/socket.io/socket.io.js"></script>
     <script>
@@ -27,16 +43,18 @@
   
       function clickButton () {
        if (toggle.textContent === 'Start') {
-         toggle.textContent = 'Stop'
+         toggle.textContent = 'Playing...'
          toggle.style.backgroundColor = 'hsl(103, 38%, 50%)'
          socket.emit('status', 1)
+       // eventually we'll remove the Stop/toggle and have it happen automatically via OSC  
        } else {
          toggle.textContent = 'Start'
          toggle.style.backgroundColor = 'hsl(337, 38%, 50%)' 
-         socket.emit('status', 0)
+         //socket.emit('status', 1)
          // CSS property names use "camel case" 
          // so "background-color" becomes "backgroundColor"
        }
+       
       }
       
       const toggle = document.querySelector('#toggle')
@@ -45,5 +63,8 @@
 
 
     </script>
+
+	<p id="users">Users online: 1</p>
+
   </body>
 </html>
