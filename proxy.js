@@ -8,7 +8,7 @@ const serverURL = 'http://165.232.132.201'
 const socket = io(serverURL)
 
 socket.on('connect', () => {
-  console.log('Connected to server!')
+  console.log('Connected to server ' + serverURL)
   socket.on('proxy-status', (data) => {
     console.log('got message', data)
     const client = new OSC.Client(MAX_IP, MAX_PORT)
