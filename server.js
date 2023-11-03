@@ -1,13 +1,10 @@
+require('dotenv').config()
 const express = require('express')
 const app = express()
 const http = require('http').Server(app)
 const io = require('socket.io')(http)
-const port = 80
+const port = process.env.SERVER_PORT
 // const OSC = require('node-osc')
-
-// const MAX_IP = '192.168.86.42'
-// const MAX_IP = '0.0.0.0'
-// const MAX_PORT = '2222'
 
 app.get('/', (req, res) => {
   res.sendFile(`${__dirname}/index.html`)

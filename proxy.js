@@ -1,10 +1,11 @@
+require('dotenv').config()
 const io = require('socket.io-client')
 const OSC = require('node-osc')
 
-const MAX_IP = '0.0.0.0'
-const MAX_PORT = '2222'
-// const serverURL = 'http://localhost:3000'
-const serverURL = 'http://165.232.132.201'
+const MAX_IP = process.env.MAX_IP
+const MAX_PORT = process.env.MAX_PORT
+
+const serverURL = `http://${process.env.DO_IP}:${process.env.SERVER_PORT}`
 const socket = io(serverURL)
 
 socket.on('connect', () => {
