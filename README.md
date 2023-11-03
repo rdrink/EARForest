@@ -14,6 +14,8 @@ where SERVER_IP && SERVER_PORT refer to the IP/PORT of the machine running `serv
 
 ## run
 
+0. make sure all variables are correct in `.env`
+
 1. on the machine running the server run:
 ```
 node server.js
