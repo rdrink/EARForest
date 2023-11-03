@@ -5,16 +5,26 @@ const http = require('http').Server(app)
 const io = require('socket.io')(http)
 const port = process.env.SERVER_PORT
 
+let connectedClients = 0
+
 app.use(express.static('www'))
 
 io.on('connection', (socket) => {
-  console.log('a user connected')
+  connectedClients++
+  socket.emit('clients-updated', connectedClients)
+  socket.broadcast.emit('clients-updated', connectedClients)
+
   socket.on('status', (data) => {
     console.log('received', data)
-    // const client = new OSC.Client(MAX_IP, MAX_PORT)
-    // client.send(`/status ${data}`, 200, () => client.close())
     socket.broadcast.emit('proxy-status', data)
   })
+
+  socket.on('disconnect', () => {
+    connectedClients--
+    socket.broadcast.emit('clients-updated', connectedClients)
+  })
+
+  console.log(`${connectedClients} users connected`)
 })
 
 http.listen(port, () => {

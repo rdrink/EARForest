@@ -6,11 +6,11 @@ const MAX_IP = process.env.MAX_IP
 const MAX_PORT = process.env.MAX_PORT
 
 const oscServer = new OSC.Server(3333, '0.0.0.0', () => {
-  console.log('OSC Server is listening')
+  console.log('listen for OSC messages from local machine')
 })
 
 oscServer.on('message', function (msg) {
-  console.log(`Message: ${msg}`)
+  console.log(`got MAX/OSC message: ${msg}`)
   socket.emit('status', msg)
   // oscServer.close()
 })
@@ -23,9 +23,8 @@ socket.on('connect', () => {
   console.log('Connected to server ' + serverURL)
 
   socket.on('proxy-status', (data) => {
-    console.log('got message', data)
+    console.log('got server message', data)
     const client = new OSC.Client(MAX_IP, MAX_PORT)
     client.send(`/status ${data}`, 200, () => client.close())
   })
-
 })
