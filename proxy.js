@@ -5,8 +5,9 @@ const OSC = require('node-osc')
 const MAX_IP = process.env.MAX_IP
 const MAX_PORT = process.env.MAX_PORT
 
-const serverURL = `http://${process.env.DO_IP}:${process.env.SERVER_PORT}`
+const serverURL = `http://${process.env.SERVER_IP}:${process.env.SERVER_PORT}`
 const socket = io(serverURL)
+console.log(`listening to ${serverURL}`)
 
 socket.on('connect', () => {
   console.log('Connected to server ' + serverURL)
