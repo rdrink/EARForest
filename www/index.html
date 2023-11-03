@@ -14,57 +14,61 @@
         padding-left: 15%;
         padding-right: 15%;
       }
-	  
+
       h2 {
 		  	font-family: Arial, Helvetica, sans-serif;
       	/*color: gray;*/
 	  	}
-      
+
       p {
         font-family: Arial, Helvetica, sans-serif;
       }
-      
+
 			#users {
         font-size: 0.75em;
       	color: gray;
       }
-      
-      
+
+
 
   </style>
   </head>
   <body>
 	  <h2>EAR Forest Web Player</h2>
-    
+
     <p>
-     Current file: 16ch_count.aiff 
+     Current file: 16ch_count.aiff
     </p>
-    
+
     <button id="toggle">Start</button>
-	
-    
+
+
     <script src="/socket.io/socket.io.js"></script>
     <script>
       const socket = io()
-  
+
+      socket.on('proxy-status', (data) => {
+        console.log(data)
+      })
+
       function clickButton () {
        if (toggle.textContent === 'Start') {
          toggle.textContent = 'Playing...'
          toggle.style.backgroundColor = 'hsl(103, 38%, 50%)'
          socket.emit('status', 1)
-       // eventually we'll remove the Stop/toggle and have it happen automatically via OSC  
+       // eventually we'll remove the Stop/toggle and have it happen automatically via OSC
        } else {
          toggle.textContent = 'Start'
-         toggle.style.backgroundColor = 'hsl(337, 38%, 50%)' 
+         toggle.style.backgroundColor = 'hsl(337, 38%, 50%)'
          //socket.emit('status', 1)
-         // CSS property names use "camel case" 
+         // CSS property names use "camel case"
          // so "background-color" becomes "backgroundColor"
        }
-       
+
       }
-      
+
       const toggle = document.querySelector('#toggle')
-      
+
       toggle.addEventListener('click', clickButton)
 
 
