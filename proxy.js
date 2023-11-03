@@ -6,9 +6,9 @@ const MAX_IP = process.env.MAX_IP
 const MAX_PORT = process.env.MAX_PORT
 
 const serverURL = `http://${process.env.SERVER_IP}:${process.env.SERVER_PORT}`
-const socket = io(serverURL)
-console.log(`listening to ${serverURL}`)
+console.log(`reaching out to ${serverURL}`)
 
+const socket = io(serverURL)
 socket.on('connect', () => {
   console.log('Connected to server ' + serverURL)
   socket.on('proxy-status', (data) => {
